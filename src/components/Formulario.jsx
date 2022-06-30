@@ -30,12 +30,15 @@ const Formulario = () => {
 
     // destructuring para obtener el state y el setState
     const [cryptos, setCryptos] = useState([])
+
+    //! custom hook
     const [ moneda, SelectMonedas ] = useSelectMonedas('Elige tu Moneda', monedas);
+    const [ cryptomoneda, SelectCryptomoneda ] = useSelectMonedas('Elige tu Cryptomoneda', cryptos);
 
     useEffect(() => {
 
         const consultarAPI = async () => {
-            const url = `https://min-api.cryptocompare.com/data/top/mktcapfull?limit=10&tsym=USD`
+            const url = `https://min-api.cryptocompare.com/data/top/mktcapfull?limit=30&tsym=USD`
 
             const respuesta = await fetch(url);
             const resultado = await respuesta.json();
@@ -44,7 +47,7 @@ const Formulario = () => {
 
                 const objeto = {
                     id: cripto.CoinInfo.Name,
-                    nombre: cripto.CoinInfo.FullName
+                    name: cripto.CoinInfo.FullName
                 }
 
                 return objeto;
@@ -62,7 +65,8 @@ const Formulario = () => {
     <form>
         
         <SelectMonedas />
-            {moneda}
+        <SelectCryptomoneda />
+
         <InputSubmit 
             type="submit" 
             value="Cotizar"
