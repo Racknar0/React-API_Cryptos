@@ -25,13 +25,15 @@ const InputSubmit = styled.input`
 const Formulario = () => {
 
     // destructuring para obtener el state y el setState
-    const [ selectMonedas ] = useSelectMonedas();
+    const [ SelectMonedas ] = useSelectMonedas('Elige tu Moneda');
 
-    selectMonedas();
+
 
   return (
     <form>
         
+        <SelectMonedas />
+
         <InputSubmit 
             type="submit" 
             value="Cotizar"
