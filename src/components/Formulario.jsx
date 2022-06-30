@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import useSelectMonedas from '../hooks/useSelectMonedas'
 import { monedas } from '../data/monedas'
@@ -29,6 +29,7 @@ const Formulario = () => {
    
 
     // destructuring para obtener el state y el setState
+    const [cryptos, setCryptos] = useState([])
     const [ moneda, SelectMonedas ] = useSelectMonedas('Elige tu Moneda', monedas);
 
     useEffect(() => {
@@ -39,8 +40,18 @@ const Formulario = () => {
             const respuesta = await fetch(url);
             const resultado = await respuesta.json();
 
+            const arrayCripto = resultado.Data.map(cripto => {
 
-            console.log(resultado.Data);
+                const objeto = {
+                    id: cripto.CoinInfo.Name,
+                    nombre: cripto.CoinInfo.FullName
+                }
+
+                return objeto;
+
+            })
+
+            setCryptos(arrayCripto);
         }
         consultarAPI();
 
