@@ -1,1 +1,1 @@
-deploy:
+deploy: https://react-api-cryptos.netlify.app/
